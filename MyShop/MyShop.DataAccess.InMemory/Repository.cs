@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyShop.DataAccess.InMemory
 {
-    public class Repository<T> where T : BaseClass
+    public class Repository<T> : IRepository<T> where T : BaseClass
     {
         ObjectCache cache = MemoryCache.Default;
         List<T> items;
@@ -38,26 +38,26 @@ namespace MyShop.DataAccess.InMemory
         {
             T tToUpdate = items.Find(p => p.Id == t.Id);
             if (tToUpdate == null)
-                {
-                    throw new Exception(className + " not found");
-                }
+            {
+                throw new Exception(className + " not found");
+            }
             else
-                {
-                    tToUpdate = t;
-                }         
+            {
+                tToUpdate = t;
+            }
         }
 
         public T Find(string Id)
         {
             T tToFind = items.Find(p => p.Id == Id);
-                if (tToFind == null)
-                {
-                    throw new Exception(className + " not found");
-                }
-                else
-                {
-                    return tToFind;
-                }
+            if (tToFind == null)
+            {
+                throw new Exception(className + " not found");
+            }
+            else
+            {
+                return tToFind;
+            }
         }
 
         public void Delete(string Id)
@@ -77,6 +77,6 @@ namespace MyShop.DataAccess.InMemory
         {
             return items.AsQueryable();
         }
-      
+
     }
 }
