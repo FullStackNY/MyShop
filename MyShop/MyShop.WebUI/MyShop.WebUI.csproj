@@ -195,6 +195,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201911281740125_AddBasket.cs" />
+    <Compile Include="Migrations\201911281740125_AddBasket.Designer.cs">
+      <DependentUpon>201911281740125_AddBasket.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -301,6 +306,11 @@
       <Project>{e529d284-e560-4ec2-9df9-c51b35d61f6c}</Project>
       <Name>MyShop.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201911281740125_AddBasket.resx">
+      <DependentUpon>201911281740125_AddBasket.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
