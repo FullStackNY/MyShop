@@ -48,6 +48,7 @@
     <Compile Include="Models\BaseClass.cs" />
     <Compile Include="Models\Basket.cs" />
     <Compile Include="Models\BasketItems.cs" />
+    <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

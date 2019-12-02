@@ -10,7 +10,7 @@ using System.Web;
 
 namespace MyShop.Services
 {
-    public class BasketService
+    public class BasketService : IBasketService
     {
         IRepository<Product> productContext;
         IRepository<Basket> basketContext;
@@ -36,13 +36,12 @@ namespace MyShop.Services
                     basket = basketContext.Find(basketId);
                 }
                 else
+                if (createIfNull)
                 {
-                    if (createIfNull)
-                    {
-                        basket = CreateNewBasket(httpContext);
-                    }
+                    basket = CreateNewBasket(httpContext);
                 }
             }
+            else
             if (createIfNull)
             {
                 basket = CreateNewBasket(httpContext);
@@ -57,14 +56,14 @@ namespace MyShop.Services
             basketContext.Insert(basket);
             basketContext.Commit();
 
-            HttpCookie cookie = new HttpCookie(BasketSessionName);
+            HttpCookie cookie =  new HttpCookie(BasketSessionName);
             cookie.Value = basket.Id;
             cookie.Expires = DateTime.Now.AddDays(1);
             httpContext.Response.Cookies.Add(cookie);
             return basket;
         }
 
-        private void AddToBasket(HttpContextBase httpContext, string productId)
+        public void AddToBasket(HttpContextBase httpContext, string productId)
         {
             Basket basket = GetBasket(httpContext, true);
             BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
@@ -86,7 +85,7 @@ namespace MyShop.Services
             basketContext.Commit();
         }
 
-        private void RemoveFromBasket(HttpContextBase httpContext, string itemId)
+        public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
         {
             Basket basket = GetBasket(httpContext, true);
             BasketItem item = basket.BasketItems.FirstOrDefault(i => i.Id == itemId);
